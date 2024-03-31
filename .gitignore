@@ -6,5 +6,8 @@
 # Thumbnails
 ._*
 
-# Project-specific
+# Build files
 build
+
+# Vim
+*.swp
