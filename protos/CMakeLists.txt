@@ -1,14 +1,14 @@
-# Directory where the protobuf_generate_cpp() will output the generated files
-set(PROTO_SRC_DIR ${CMAKE_CURRENT_BINARY_DIR})
+find_package(protobuf CONFIG REQUIRED)
 
-# Globbing .proto files
-file(GLOB PROTO_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*.proto")
+add_library(proto-objects OBJECT "${CMAKE_CURRENT_LIST_DIR}/grocery.proto")
 
-# Generate C++ sources and headers from the .proto files
-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS ${PROTO_FILES})
+target_link_libraries(proto-objects PUBLIC protobuf::libprotobuf)
 
-# Create a library from the generated sources
-add_library(proto ${PROTO_SRCS} ${PROTO_HDRS})
+set(PROTO_BINARY_DIR "${CMAKE_CURRENT_BINARY_DIR}/")
 
-# Since the generated files are in the binary dir, include that directory
-target_include_directories(proto PUBLIC ${PROTO_SRC_DIR})
+target_include_directories(proto-objects PUBLIC "$<BUILD_INTERFACE:${PROTO_BINARY_DIR}>")
+
+protobuf_generate(
+    TARGET proto-objects
+    IMPORT_DIRS "${CMAKE_CURRENT_LIST_DIR}"
+    PROTOC_OUT_DIR "${PROTO_BINARY_DIR}")
