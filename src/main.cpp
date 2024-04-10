@@ -2,8 +2,12 @@
 #include <iostream>
 
 #include "grocery.pb.h"
+#include "writer.hpp"
 
 int main(void) {
+	Writer w;
+	w.writeRecord();
+
 	httplib::Server svr;
 
 	svr.Get("/ping", [](const httplib::Request&, httplib::Response& res) {
