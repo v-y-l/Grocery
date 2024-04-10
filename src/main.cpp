@@ -5,8 +5,11 @@
 #include "writer.hpp"
 
 int main(void) {
-	Writer w;
-	w.writeRecord();
+	Writer w("test.output");
+	grocery::Item item;
+	item.set_name("writer from proto");
+	w.insert(item);
+	w.flush();
 
 	httplib::Server svr;
 

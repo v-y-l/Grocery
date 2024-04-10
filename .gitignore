@@ -11,3 +11,6 @@ build
 
 # Vim
 *.swp
+
+# VSCode
+.vscode
