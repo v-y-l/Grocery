@@ -1,6 +1,9 @@
 #include "writer.hpp"
+#include "grocery.pb.h"
 #include <iostream>
 
 void Writer::writeRecord() {
-    std::cout << "Hello from MyClass!" << std::endl;
+    grocery::Item i;
+    i.set_name("item");
+    std::cout << i.name() << std::endl;
 }
