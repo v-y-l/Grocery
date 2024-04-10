@@ -7,7 +7,7 @@ FetchContent_Declare(
 )
 
 FetchContent_GetProperties(cpp_httplib)
-if(NOT cpp_httplb_POPULATED)
+if(NOT cpp_httplib_POPULATED)
 	FetchContent_Populate(cpp_httplib)
 	add_library(httplib INTERFACE)
 	target_include_directories(httplib INTERFACE ${cpp_httplib_SOURCE_DIR})
